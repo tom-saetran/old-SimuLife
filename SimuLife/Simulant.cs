@@ -61,13 +61,17 @@ namespace SimuLife {
 	}
 
 	class Simulant {
+		public enum Genders {
+			Female,
+			Male
+		}
 		public Simulant ParentFemale { get; protected set; }
 		public Simulant ParentMale { get; protected set; }
 		public Name Name { get; protected set;}
-		public TimeStamp ConceptionTimeStamp;
-		public TimeStamp BirthTimeStamp;
-		public TimeStamp DeathTimeStamp;
-
+		public TimeStamp ConceptionTimeStamp { get; protected set; }
+		public TimeStamp BirthTimeStamp { get; protected set; }
+		public TimeStamp DeathTimeStamp { get; protected set; }
+		public Genders Gender { get; protected set; }
 		public Simulant(Simulant parentFemale, Simulant parentMale) {
 			ParentFemale = parentFemale;
 			ParentMale = parentMale;
@@ -75,6 +79,7 @@ namespace SimuLife {
 			ConceptionTimeStamp = new TimeStamp();
 			BirthTimeStamp = new TimeStamp();
 			DeathTimeStamp = new TimeStamp();
+			Gender = new Random().NextDouble() > 0.5 ? Genders.Female : Genders.Male;
 		}
 	}
 }
