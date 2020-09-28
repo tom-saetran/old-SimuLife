@@ -1,20 +1,5 @@
 ﻿namespace SimuLife {
-	class Time {
-		public enum Hours {
-			Night,   LateNight,   EarlyMorning,
-			Morning, LateMorning, EarlyDay,
-			Day,     LateDay,     EarlyEvening,
-			Evening, LateEvening, EarlyNight
-		}
-		public enum Days {
-			Monday, Tuesday, Wednesday, Thursday, Friday,
-			Saturday, Sunday
-		}
-		public enum Seasons {
-			Winter, Spring,
-			Summer, Autumn
-		}
-
+	partial class Time {
 		public Hours Hour { get; protected set; }
 		public Days Day { get; protected set; }
 		public Seasons Season { get; protected set; }

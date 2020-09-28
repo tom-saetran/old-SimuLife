@@ -14,13 +14,16 @@ namespace SimuLife {
 			return new Name("First", "Last");
 		}
 		public static Time GenerateBirthTime (Simulant simulant) {
-			// time now + ~3 seasons
-			return new Time(null);
+			// time now + ~3 Seasons
+			// 18-24 days
+			Time time = new Time(Simulator.TimeNow);
+			return time; // TODO: FIX
 		}
 		public static Time GenerateDeathTime (Simulant simulant) {
 			// time now + 0-111 years
 			// normal distribution at 77
-			return new Time(null);
+			Time time = new Time(Simulator.TimeNow);
+			return time;
 		}
 	}
 }
