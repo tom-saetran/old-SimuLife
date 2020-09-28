@@ -1,62 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SimuLife {
 
 	class Name {
+
 		public string FirstName { get; protected set; }
 		public string LastName { get; protected set; }
-		public Name(string firstName, string lastName) {
+
+		public Name (string firstName, string lastName) {
 			FirstName = firstName;
 			LastName = lastName;
-		}
-	}
-	class TimeStamp {
-		public enum Hours {
-			Night,
-			LateNight,
-			EarlyMorning,
-			Morning,
-			LateMorning,
-			EarlyDay,
-			Day,
-			LateDay,
-			EarlyEvening,
-			Evening,
-			LateEvening,
-			EarlyNight
-		}
-		public enum Days {
-			Monday,
-			Tuesday,
-			Wednesday,
-			Thursday,
-			Friday,
-			Saturday,
-			Sunday
-		}
-		public enum Seasons {
-			Winter,
-			Spring,
-			Summer,
-			Autumn
-		}
-		public Hours Hour { get; protected set; }
-		public Days Day { get; protected set; }
-		public Seasons Season { get; protected set; }
-		public uint Year { get; protected set; }
-		public TimeStamp() {
-			Hour = Hours.Night;
-			Day = Days.Monday;
-			Season = Seasons.Spring;
-			Year = 420;
-		}
-		public TimeStamp(Hours hour, Days day, Seasons season, uint year) {
-			Hour = hour;
-			Day = day;
-			Season = season;
-			Year = year;
 		}
 	}
 
@@ -65,21 +21,70 @@ namespace SimuLife {
 			Female,
 			Male
 		}
+		public enum LifeStages {
+			Concieved,		// [0-1>    Semester, Unborn
+			Fetus,			// [1-3]    Semesters, Unborn
+			Baby,			// [0-2>    Years
+			Toddler,        // [2-6>    Years
+			Child,          // [6-12>   Years
+			Teen,           // [12-20>  Years
+			YoungAdult,     // [20-32>  Years
+			Adult,          // [32-46>  Years
+			OldAdult,       // [46-62>  Years
+			Senior,         // [62-80>  Years
+			Elder,          // [80-100> Years
+			Ancient         // [100>    Years
+		}
+		public enum HealthStages {
+			Healthy,
+			Recovering,
+			Sick,
+			VerySick,
+			Dying,
+			Dead
+		}
+
 		public Simulant ParentFemale { get; protected set; }
 		public Simulant ParentMale { get; protected set; }
 		public Name Name { get; protected set;}
-		public TimeStamp ConceptionTimeStamp { get; protected set; }
-		public TimeStamp BirthTimeStamp { get; protected set; }
-		public TimeStamp DeathTimeStamp { get; protected set; }
+		public Time ConceptionTime { get; protected set; }
+		public Time BirthTime { get; protected set; }
+		public Time DeathTime { get; protected set; }
 		public Genders Gender { get; protected set; }
-		public Simulant(Simulant parentFemale, Simulant parentMale) {
+		public LifeStages LifeStage { get; protected set; }
+		public HealthStages HealthStage { get; protected set; }
+
+		public Simulant (Simulant parentFemale, Simulant parentMale) {
 			ParentFemale = parentFemale;
 			ParentMale = parentMale;
-			Name = new Name("First Name", "Last Name");
-			ConceptionTimeStamp = new TimeStamp();
-			BirthTimeStamp = new TimeStamp();
-			DeathTimeStamp = new TimeStamp();
-			Gender = new Random().NextDouble() > 0.5 ? Genders.Female : Genders.Male;
+			Name = Generators.GenerateName(this);
+			ConceptionTime = Simulator.TimeNow;
+			BirthTime = Generators.GenerateBirthTime(this);
+			DeathTime = Generators.GenerateDeathTime(this);
+			Gender = Generators.GenerateGender();
+			LifeStage = LifeStages.Concieved;
+			HealthStage = HealthStages.Healthy;
+		}
+		public void Die () {
+			HealthStage = HealthStages.Dead;
+			DeathTime = Simulator.TimeNow;
+		}
+		public Simulant Conceive (Simulant partner) {
+
+			float chance = 0.5f;	
+
+			if (Gender == partner.Gender ||
+				LifeStage > LifeStages.Teen ||
+				partner.LifeStage > LifeStages.Teen ||
+				LifeStage < LifeStages.OldAdult ||
+				partner.LifeStage < LifeStages.OldAdult)
+				return null;
+
+			if (ParentFemale == partner.ParentFemale ||
+				ParentMale == partner.ParentMale)
+				chance = 0.2f;
+
+			return Generators.Random.NextDouble() < chance ? (Gender == Genders.Female ? new Simulant(this, partner) : new Simulant(partner, this)) : null;
 		}
 	}
 }
