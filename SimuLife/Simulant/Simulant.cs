@@ -24,26 +24,5 @@
 			LifeStage = LifeStages.Concieved;
 			HealthStage = HealthStages.Healthy;
 		}
-		public Simulant Conceive (Simulant partner) {
-
-			float chance = 0.5f;	
-
-			if (Gender == partner.Gender ||
-				LifeStage > LifeStages.Teen ||
-				partner.LifeStage > LifeStages.Teen ||
-				LifeStage < LifeStages.OldAdult ||
-				partner.LifeStage < LifeStages.OldAdult)
-				return null;
-
-			if (ParentFemale == partner.ParentFemale ||
-				ParentMale == partner.ParentMale)
-				chance = 0.2f;
-
-			return Generators.Random.NextDouble() < chance ? (Gender == Genders.Female ? new Simulant(this, partner) : new Simulant(partner, this)) : null;
-		}
-		public void Die () {
-			HealthStage = HealthStages.Dead;
-			DeathTime = Simulator.TimeNow;
-		}
 	}
 }
