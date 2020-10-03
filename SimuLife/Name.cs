@@ -5,7 +5,7 @@
 
 		public Name (string firstName, string lastName) {
 			FirstName = firstName;
-			LastName = lastName;
+			LastName  = lastName;
 		}
 	}
 }

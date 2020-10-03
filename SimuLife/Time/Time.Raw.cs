@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SimuLife {
+﻿namespace SimuLife {
 	partial class Time {
 		public static uint Raw { get; protected set; }
 
@@ -14,6 +10,7 @@ namespace SimuLife {
 
 			return result;
 		}
+
 		public static Time SetFromRawTime(uint rawTime) {
 			return new Time((Hours)  (rawTime      % 12),
 							(Days)   (rawTime / 12 %  7),

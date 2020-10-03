@@ -1,6 +1,6 @@
 ﻿namespace SimuLife {
 	partial class Simulant {
-		enum AlertnessStages {
+		public enum AlertnessStages {
 			Metaconscious,
 			Conscious,
 			Confused,

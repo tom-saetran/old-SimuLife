@@ -7,8 +7,8 @@ namespace SimuLife {
 
 		public static Simulant.Genders GenerateGender () {
 			return Random.NextDouble() < 0.5 ?
-			Simulant.Genders.Female:
-			Simulant.Genders.Male;
+				   Simulant.Genders.Female:
+			       Simulant.Genders.Male;
 		}
 		public static Name GenerateName (Simulant simulant) {
 			return new Name("First", "Last");
