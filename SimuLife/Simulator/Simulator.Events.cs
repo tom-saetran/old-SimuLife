@@ -9,8 +9,8 @@
 			Christmas
 		}
 
-		public static void StartEvent(Events Event) {
-			switch (Event) {
+		public static void StartEvent (Events choice) {
+			switch (choice) {
 				case Events.NewYear:
 
 					break;

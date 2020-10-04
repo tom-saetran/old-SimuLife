@@ -10,9 +10,9 @@
 
 			if (simulant.Gender   == partner.Gender      ||
 				simulant.LifeStage > LifeStages.Teen     ||
-				partner.LifeStage  > LifeStages.Teen     ||
+				 partner.LifeStage > LifeStages.Teen     ||
 				simulant.LifeStage < LifeStages.OldAdult ||
-				partner.LifeStage  < LifeStages.OldAdult)
+				 partner.LifeStage < LifeStages.OldAdult)
 				return null;
 
 			if (simulant.ParentFemale == partner.ParentFemale ||
@@ -28,6 +28,13 @@
 					  new Simulant(simulant, partner)	   :
 					  new Simulant(partner, simulant))	   :
 				  null;
+		}
+		
+		public static void ToggleGender (Simulant simulant) {
+			simulant.Gender = 
+				simulant.Gender == Genders.Female ? 
+								   Genders.Male   :
+								   Genders.Female;
 		}
 	}
 }

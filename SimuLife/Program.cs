@@ -1,20 +1,23 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace SimuLife {
 	class Program {
-		static void Main(string[] args) {
-			Simulant God = new Simulant(null, null);
-			List<Simulant> Simulants = new List<Simulant>();
-
-			for (int i = 0; i < 5000000; i++) {
-				Simulants.Add(new Simulant(God, God));
+		static void Main () {
+			Population population = new Population(50);
+			WriteTime();
+			for (int i = 0; i < population.ChildrenOfAdamAndEve.Length; i++) {
 				Simulator.StartEvent(Simulator.Events.AdvanceTime);
 			}
+			WriteTime();
 			Environment.Exit(420);
+		}
+
+		static void WriteTime () {
+			Console.WriteLine(
+				"Time is " + Simulator.TimeNow.Hour   + 
+					  ", " + Simulator.TimeNow.Day    + 
+					  ", " + Simulator.TimeNow.Season + 
+					  ", " + Simulator.TimeNow.Year);
 		}
 	}
 }
