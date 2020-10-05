@@ -9,6 +9,10 @@ namespace SimuLife {
 				Simulator.StartEvent(Simulator.Events.AdvanceTime);
 			}
 			WriteTime();
+			for (int i = 0; i < population.Simulants.Length; i++) {
+				Console.WriteLine(population.Simulants[i].Name.FirstName +
+						   ", " + population.Simulants[i].DeathTime.Year);
+			}
 			Environment.Exit(420);
 		}
 

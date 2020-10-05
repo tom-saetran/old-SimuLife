@@ -4,9 +4,9 @@
 		public Simulant			ParentMale		{ get; protected set; }
 		public Simulant[]		Children		{ get; protected set; }
 		public Name				Name			{ get; protected set; }
-		public TimeCard				ConceptionTime	{ get; protected set; }
-		public TimeCard				BirthTime		{ get; protected set; }
-		public TimeCard				DeathTime		{ get; protected set; }
+		public TimeCard			ConceptionTime	{ get; protected set; }
+		public TimeCard			BirthTime		{ get; protected set; }
+		public TimeCard			DeathTime		{ get; protected set; }
 		public Genders			Gender			{ get; protected set; }
 		public LifeStages		LifeStage		{ get; protected set; }
 		public HealthStages		HealthStage		{ get; protected set; }
@@ -17,11 +17,11 @@
 			ParentFemale   = parentFemale;
 			ParentMale     = parentMale;
 			Children	   = new Simulant[0];
-			Name           = Generators.GenerateName(this);
 			ConceptionTime = Simulator.TimeNow;
 			BirthTime	   = Generators.GenerateBirthTime(this);
 			DeathTime	   = Generators.GenerateDeathTime(this);
 			Gender		   = Generators.GenerateGender();
+			Name           = Generators.GenerateName(this);
 			LifeStage	   = LifeStages.Concieved;
 			HealthStage    = HealthStages.Healthy;
 			AlertnessStage = AlertnessStages.Comatose;

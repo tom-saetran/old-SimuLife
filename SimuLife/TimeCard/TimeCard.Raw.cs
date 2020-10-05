@@ -13,9 +13,9 @@
 
 		public static TimeCard SetFromRawTime (uint rawTime) {
 			return new TimeCard((Hours)  (rawTime      % 12),
-							(Days)   (rawTime / 12 %  7),
-							(Seasons)(rawTime / 84 %  4),
-							          rawTime / 336);
+								(Days)   (rawTime / 12 %  7),
+								(Seasons)(rawTime / 84 %  4),
+									      rawTime / 336);
 		}
 	}
 }
