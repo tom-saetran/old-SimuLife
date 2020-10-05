@@ -42,22 +42,22 @@
 			uint nextYear   =       TimeNext.Year;
 
 			nextHour++;
-			if (nextHour == Time.NumHours) {
+			if (nextHour == TimeCard.NumHours) {
 				nextHour = 0;
 				nextDay++;
-				if (nextDay == Time.NumDays) {
+				if (nextDay == TimeCard.NumDays) {
 					nextDay = 0;
 					nextSeason++;
-					if (nextSeason == Time.NumSeasons) {
+					if (nextSeason == TimeCard.NumSeasons) {
 						nextSeason = 0;
 						nextYear++;
 					}
 				}
 			}
 
-			TimeNext = new Time((Time.Hours)   nextHour,
-								(Time.Days)    nextDay,
-								(Time.Seasons) nextSeason,
+			TimeNext = new TimeCard((TimeCard.Hours)   nextHour,
+								(TimeCard.Days)    nextDay,
+								(TimeCard.Seasons) nextSeason,
 											   nextYear);
 		}
 	}

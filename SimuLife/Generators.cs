@@ -13,16 +13,16 @@ namespace SimuLife {
 		public static Name GenerateName (Simulant simulant) {
 			return new Name("First", "Last");
 		}
-		public static Time GenerateBirthTime (Simulant simulant) {
+		public static TimeCard GenerateBirthTime (Simulant simulant) {
 			// time now + ~3 Seasons
 			// 18-24 days
-			Time time = new Time(Simulator.TimeNow);
+			TimeCard time = new TimeCard(Simulator.TimeNow);
 			return time; // TODO: FIX
 		}
-		public static Time GenerateDeathTime (Simulant simulant) {
+		public static TimeCard GenerateDeathTime (Simulant simulant) {
 			// time now + 0-111 years
 			// normal distribution at 77
-			Time time = new Time(Simulator.TimeNow);
+			TimeCard time = new TimeCard(Simulator.TimeNow);
 			return time;
 		}
 	}

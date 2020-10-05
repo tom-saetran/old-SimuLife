@@ -1,8 +1,8 @@
 ﻿namespace SimuLife {
-	partial class Time {
+	partial class TimeCard {
 		public static uint Raw { get; protected set; }
 
-		public static uint GetRawFromTime (Time time) {
+		public static uint GetRawFromTime (TimeCard time) {
 			uint result	 =		   time.Year        * 336;
 				 result += (uint) (time.Season + 1) * 84;
 				 result += (uint) (time.Day    + 1) * 12;
@@ -11,8 +11,8 @@
 			return result;
 		}
 
-		public static Time SetFromRawTime (uint rawTime) {
-			return new Time((Hours)  (rawTime      % 12),
+		public static TimeCard SetFromRawTime (uint rawTime) {
+			return new TimeCard((Hours)  (rawTime      % 12),
 							(Days)   (rawTime / 12 %  7),
 							(Seasons)(rawTime / 84 %  4),
 							          rawTime / 336);

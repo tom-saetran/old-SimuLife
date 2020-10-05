@@ -1,5 +1,5 @@
 ﻿namespace SimuLife {
-	partial class Time {
+	partial class TimeCard {
 		public Hours   Hour		{ get; protected set; }
 		public Days    Day		{ get; protected set; }
 		public Seasons Season	{ get; protected set; }
@@ -9,13 +9,13 @@
 		public const short NumDays    =  7;
 		public const short NumSeasons =  4;
 
-		public Time (Hours hour, Days day, Seasons season, uint year) {
+		public TimeCard (Hours hour, Days day, Seasons season, uint year) {
 			Hour   = hour;
 			Day    = day;
 			Season = season;
 			Year   = year;
 		}
-		public Time (Time time) {
+		public TimeCard (TimeCard time) {
 			Hour   = time.Hour;
 			Day    = time.Day;
 			Season = time.Season;

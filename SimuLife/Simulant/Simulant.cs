@@ -4,9 +4,9 @@
 		public Simulant			ParentMale		{ get; protected set; }
 		public Simulant[]		Children		{ get; protected set; }
 		public Name				Name			{ get; protected set; }
-		public Time				ConceptionTime	{ get; protected set; }
-		public Time				BirthTime		{ get; protected set; }
-		public Time				DeathTime		{ get; protected set; }
+		public TimeCard				ConceptionTime	{ get; protected set; }
+		public TimeCard				BirthTime		{ get; protected set; }
+		public TimeCard				DeathTime		{ get; protected set; }
 		public Genders			Gender			{ get; protected set; }
 		public LifeStages		LifeStage		{ get; protected set; }
 		public HealthStages		HealthStage		{ get; protected set; }

@@ -5,7 +5,7 @@ namespace SimuLife {
 		static void Main () {
 			Population population = new Population(50);
 			WriteTime();
-			for (int i = 0; i < population.ChildrenOfAdamAndEve.Length; i++) {
+			for (int i = 0; i < population.Simulants.Length; i++) {
 				Simulator.StartEvent(Simulator.Events.AdvanceTime);
 			}
 			WriteTime();
