@@ -36,7 +36,8 @@ namespace SimuLife {
 						    (1 - Random.NextDouble())) *
 				  	     Math.Sin
 					      (2 * Math.PI * 
-					        (1 - Random.NextDouble()))))) * 336);
+					        (1 - Random.NextDouble()))))) *
+							  336); // one year
 		}
 	}
 }
