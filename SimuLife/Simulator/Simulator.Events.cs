@@ -9,8 +9,8 @@
 			Christmas
 		}
 
-		public static void StartEvent (Events choice) {
-			switch (choice) {
+		public static void StartEvent (Events _event) {
+			switch (_event) {
 				case Events.NewYear:
 
 					break;
@@ -56,9 +56,9 @@
 			}
 
 			TimeNext = new TimeCard((TimeCard.Hours)   nextHour,
-								(TimeCard.Days)    nextDay,
-								(TimeCard.Seasons) nextSeason,
-											   nextYear);
+									(TimeCard.Days)    nextDay,
+									(TimeCard.Seasons) nextSeason,
+													   nextYear);
 		}
 	}
 }

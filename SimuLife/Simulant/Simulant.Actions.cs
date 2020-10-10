@@ -4,7 +4,7 @@
 			simulant.AlertnessStage = AlertnessStages.Comatose;
 			simulant.AwakenessStage = AwakenessStages.Asleep;
 			simulant.HealthStage	= HealthStages.Dead;
-			simulant.DeathTime		= Simulator.TimeNow;
+			simulant.TimeOfDeath		= Simulator.TimeNow;
 		}
 
 		public static Simulant Conceive (Simulant simulant, Simulant partner) {

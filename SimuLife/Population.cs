@@ -2,7 +2,10 @@
 
 namespace SimuLife {
 	class Population {
-		protected   Simulant  God, Jesus, Adam, Eve;
+		public		Simulant  God		{ get; protected set; }
+		public		Simulant  Jesus		{ get; protected set; }
+		public		Simulant  Adam		{ get; protected set; }
+		public		Simulant  Eve		{ get; protected set; }
 		public List<Simulant> Simulants { get; protected set; }
 
 		public Population (int initialPopulationSize) {				
