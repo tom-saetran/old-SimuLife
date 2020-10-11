@@ -13,7 +13,7 @@ namespace SimuLife {
 		 * how high importance the misfired task had.
 		 * 
 		 * it is more important to take care of dead grandma in the living
-		 * room, than to vacuum thefloor, but less important than to take
+		 * room, than to vacuum the floor, but less important than to take
 		 * care of the house that is on fire. 
 		 * 
 		 */

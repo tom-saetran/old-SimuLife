@@ -7,8 +7,9 @@ namespace SimuLife {
 
 			WriteTime();
 
-			while (Simulator.TimeNow.Year < 2020) {
+			while (Simulator.TimeNow.Year < 444) {
 				Simulator.StartEvent(Simulator.Events.AdvanceTime);
+
 				if (Simulator.TimeNow.Day == TimeCard.Days.Monday)
 					continue;
 			}

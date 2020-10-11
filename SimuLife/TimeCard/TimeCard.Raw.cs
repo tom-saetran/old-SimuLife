@@ -17,5 +17,10 @@
 								(Seasons)(rawTime / 84 %  4),
 									      rawTime / 336);
 		}
+
+		public static int GetDifferenceInRawTime(TimeCard first, TimeCard second) {
+			int diff = (int) GetRawFromTime(first) - (int) GetRawFromTime(second);
+			return diff;
+		}
 	}
 }

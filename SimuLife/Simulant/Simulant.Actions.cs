@@ -31,6 +31,7 @@
 					  new Simulant(partner, simulant))	   :
 				  null;
 		}
+
 		public static void ToggleGender (Simulant simulant) {
 			simulant.Gender = 
 				simulant.Gender == Genders.Female ? 

@@ -22,7 +22,6 @@ namespace SimuLife {
 		public TimeCard		   TimeOfBirth		{ get; protected set; }
 		public TimeCard		   TimeOfDeath		{ get; protected set; }
 		public Genders		   Gender			{ get; protected set; }
-		public LifeStages	   LifeStage		{ get; protected set; }
 		public HealthStages	   HealthStage		{ get; protected set; }
 		public AlertnessStages AlertnessStage   { get; protected set; }
 		public AwakenessStages AwakenessStage   { get; protected set; }
@@ -36,7 +35,6 @@ namespace SimuLife {
 			TimeOfDeath		 = Generators.GenerateDeathTime(this);
 			Gender			 = Generators.GenerateGender();
 			Name			 = Generators.GenerateName(this);
-			LifeStage		 = LifeStages.Concieved;
 			HealthStage		 = HealthStages.Healthy;
 			AlertnessStage	 = AlertnessStages.Comatose;
 			AwakenessStage	 = AwakenessStages.Asleep;

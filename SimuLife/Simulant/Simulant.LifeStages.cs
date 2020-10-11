@@ -1,18 +1,25 @@
 ﻿namespace SimuLife {
 	partial class Simulant {
 		public enum LifeStages {
-			Concieved,		// [0-1>    Semester, Unborn
-			Fetus,			// [1-3]    Semesters, Unborn
-			Baby,			// [0-2>    Years
-			Toddler,        // [2-6>    Years
-			Child,          // [6-12>   Years
-			Teen,           // [12-20>  Years  [Notes for summary]
-			YoungAdult,     // [20-32>  Years
-			Adult,          // [32-46>  Years
-			OldAdult,       // [46-62>  Years
-			Senior,         // [62-80>  Years
-			Elder,          // [80-100> Years
-			Ancient         // [100>    Years
+			Concieved,  Fetus, Baby,
+			Toddler,    Child, Teen,
+			YoungAdult,	Adult, OldAdult,
+			Senior,     Elder, Ancient
 		}
+
+		public LifeStages LifeStage => TimeCard.GetDifferenceInRawTime(Simulator.TimeNow, TimeOfBirth) switch {
+			int n when n > 33600 => LifeStages.Ancient,
+			int n when n > 26880 => LifeStages.Elder,
+			int n when n > 20832 => LifeStages.Senior,
+			int n when n > 15456 => LifeStages.OldAdult,
+			int n when n > 10752 => LifeStages.Adult,
+			int n when n > 6720  => LifeStages.YoungAdult,
+			int n when n > 4032  => LifeStages.Teen,
+			int n when n > 2016  => LifeStages.Child,
+			int n when n > 672   => LifeStages.Toddler,
+			int n when n > 0     => LifeStages.Baby,
+			int n when n > -25   => LifeStages.Fetus,
+			_					 => LifeStages.Concieved
+		};
 	}
 }
