@@ -22,9 +22,10 @@ namespace SimuLife {
 		public TimeCard		   TimeOfBirth		{ get; protected set; }
 		public TimeCard		   TimeOfDeath		{ get; protected set; }
 		public Genders		   Gender			{ get; protected set; }
-		public HealthStages	   HealthStage		{ get; protected set; }
 		public AlertnessStages AlertnessStage   { get; protected set; }
 		public AwakenessStages AwakenessStage   { get; protected set; }
+
+		public TimeCard AgeAtDeath => TimeCard.GetDifferenceInTimeCard(TimeOfDeath, TimeOfBirth);
 
 		public Simulant (Simulant parentFemale, Simulant parentMale) {
 			ParentFemale	 = parentFemale;
@@ -35,7 +36,6 @@ namespace SimuLife {
 			TimeOfDeath		 = Generators.GenerateDeathTime(this);
 			Gender			 = Generators.GenerateGender();
 			Name			 = Generators.GenerateName(this);
-			HealthStage		 = HealthStages.Healthy;
 			AlertnessStage	 = AlertnessStages.Comatose;
 			AwakenessStage	 = AwakenessStages.Asleep;
 

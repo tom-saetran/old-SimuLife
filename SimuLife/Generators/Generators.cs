@@ -35,14 +35,14 @@ namespace SimuLife {
 		}
 
 		public static TimeCard GenerateBirthTime (Simulant simulant) {
-			return TimeCard.SetFromRawTime(
-				   TimeCard.GetRawFromTime(simulant.TimeOfConception) +
+			return TimeCard.SetTimeCardFromTicks(
+				   TimeCard.GetTicksFromTimeCard(simulant.TimeOfConception) +
 				   (uint) Random.Next(18, 25));
 		}
 
 		public static TimeCard GenerateDeathTime (Simulant simulant) {
-			return TimeCard.SetFromRawTime(
-				   TimeCard.GetRawFromTime(simulant.TimeOfConception) +
+			return TimeCard.SetTimeCardFromTicks(
+				   TimeCard.GetTicksFromTimeCard(simulant.TimeOfConception) +
 				   (uint)
 					 (75 +  // mean
 					   (25 * // stdDev

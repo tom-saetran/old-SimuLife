@@ -1,17 +1,37 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace SimuLife {
 	class Program {
 		static void Main () {
-			Population TestSims = new Population(100);
+			Population population = new Population(100);
 
 			WriteTime();
 
-			while (Simulator.TimeNow.Year < 444) {
+			while (Simulator.TimeNow.Year < 2020) {
 				Simulator.StartEvent(Simulator.Events.AdvanceTime);
+				Simulant one = population.Alive[Generators.Random.Next(population.Alive.Count)];
+				Simulant two = population.Alive[Generators.Random.Next(population.Alive.Count)];
 
-				if (Simulator.TimeNow.Day == TimeCard.Days.Monday)
-					continue;
+				Simulant x = Simulant.Conceive(one, two);
+				if (x != null) {
+					population.Alive.Add(x);
+				}
+
+				if (Simulator.TimeNow.Ticks % 336 == 0) {
+					List<Simulant> moveToDead = new List<Simulant>(0);
+
+					foreach (Simulant simulant in population.Alive) {
+						if (simulant.HealthStage == Simulant.HealthStages.Dead) {
+							moveToDead.Add(simulant);
+						}
+					}
+					foreach (Simulant simulant in moveToDead) {
+						population.Alive.Remove(simulant);
+						population.Dead.Add(simulant);
+					}
+				}
 			}
 			
 			WriteTime();

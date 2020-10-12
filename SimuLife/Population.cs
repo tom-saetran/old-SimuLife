@@ -6,14 +6,16 @@ namespace SimuLife {
 		public		Simulant  Jesus		{ get; protected set; }
 		public		Simulant  Adam		{ get; protected set; }
 		public		Simulant  Eve		{ get; protected set; }
-		public List<Simulant> Simulants { get; protected set; }
+		public List<Simulant> Alive		{ get; protected set; }
+		public List<Simulant> Dead		{ get; protected set; }
 
 		public Population (int initialPopulationSize) {				
 			God		  = new		 Simulant(null,  null);
 			Jesus	  = new		 Simulant(God,   God);
 			Adam	  = new		 Simulant(Jesus, Jesus);
 			Eve		  = new		 Simulant(Jesus, Jesus);
-			Simulants = new List<Simulant>(initialPopulationSize);
+			Alive	  = new List<Simulant>(initialPopulationSize);
+			Dead	  = new List<Simulant>(initialPopulationSize);
 
 			if (Adam.Gender == Simulant.Genders.Female)
 				Simulant.ToggleGender(Adam);
@@ -21,7 +23,7 @@ namespace SimuLife {
 				Simulant.ToggleGender(Eve);
 
 			for (int i = 0; i < initialPopulationSize; i++) {
-				Simulants.Add(new Simulant(Eve, Adam));
+				Alive.Add(new Simulant(Eve, Adam));
 			}
 		}
 	}

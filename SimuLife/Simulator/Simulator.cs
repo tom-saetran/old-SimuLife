@@ -7,7 +7,7 @@
 		static Simulator () {
 			TimeNow  = new TimeCard(TimeCard.Hours.Night,     TimeCard.Days.Monday, TimeCard.Seasons.Winter, 420);
 			TimeNext = new TimeCard(TimeCard.Hours.LateNight, TimeCard.Days.Monday, TimeCard.Seasons.Winter, 420);
-			RawTime  =	   TimeCard.GetRawFromTime(TimeNow);
+			RawTime  =	   TimeCard.GetTicksFromTimeCard(TimeNow);
 		}
 	}
 }
