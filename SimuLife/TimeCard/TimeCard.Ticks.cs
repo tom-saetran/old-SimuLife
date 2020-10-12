@@ -5,15 +5,13 @@ namespace SimuLife {
 		public uint Ticks => GetTicksFromTimeCard(this);
 
 		public static uint GetTicksFromTimeCard (TimeCard time) {
-			uint result	 =		   time.Year        * 336;
-				 result += (uint) (time.Season + 1) * 84;
-				 result += (uint) (time.Day    + 1) * 12;
-				 result += (uint) (time.Hour   + 1);
-
-			return result;
+			return (time.Year   * 336) +
+			((uint) time.Season * 84) +
+			((uint) time.Day    * 7) +
+			 (uint) time.Hour;
 		}
 
-		public static TimeCard SetTimeCardFromTicks (uint rawTime) {
+		public static TimeCard GetTimeCardFromTicks (uint rawTime) {
 			return new TimeCard((Hours)  (rawTime      % 12),
 								(Days)   (rawTime / 12 %  7),
 								(Seasons)(rawTime / 84 %  4),
@@ -26,7 +24,7 @@ namespace SimuLife {
 		}
 
 		public static TimeCard GetDifferenceInTimeCard(TimeCard first, TimeCard second) {
-			return SetTimeCardFromTicks((uint) GetDifferenceInTicks(first, second));
+			return GetTimeCardFromTicks((uint) GetDifferenceInTicks(first, second));
 		}
 	}
 }

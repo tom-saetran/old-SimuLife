@@ -20,7 +20,7 @@ namespace SimuLife {
 			FirstNamesFemale[Random.Next(FirstNamesFemale.Length)] :
 			FirstNamesMale  [Random.Next(FirstNamesMale.Length)];
 
-			if (simulant.ParentMale == null || simulant.ParentMale == null) {
+			if (simulant.ParentFemale == null || simulant.ParentMale == null) {
 				return new Name(first, GetNewLastNameFromPool());
 			}
 
@@ -35,13 +35,13 @@ namespace SimuLife {
 		}
 
 		public static TimeCard GenerateBirthTime (Simulant simulant) {
-			return TimeCard.SetTimeCardFromTicks(
+			return TimeCard.GetTimeCardFromTicks(
 				   TimeCard.GetTicksFromTimeCard(simulant.TimeOfConception) +
 				   (uint) Random.Next(18, 25));
 		}
 
 		public static TimeCard GenerateDeathTime (Simulant simulant) {
-			return TimeCard.SetTimeCardFromTicks(
+			return TimeCard.GetTimeCardFromTicks(
 				   TimeCard.GetTicksFromTimeCard(simulant.TimeOfConception) +
 				   (uint)
 					 (75 +  // mean

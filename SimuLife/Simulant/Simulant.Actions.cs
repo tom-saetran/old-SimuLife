@@ -5,7 +5,7 @@
 		}
 
 		public static Simulant Conceive (Simulant simulant, Simulant partner) {
-			float chance = 0.01f;
+			float chance = 0.82f;
 
 			if (simulant.Gender == partner.Gender)
 				return null;

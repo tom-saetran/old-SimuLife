@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace SimuLife {
 	class Program {
@@ -9,8 +8,11 @@ namespace SimuLife {
 
 			WriteTime();
 
+
+
 			while (Simulator.TimeNow.Year < 2020) {
 				Simulator.StartEvent(Simulator.Events.AdvanceTime);
+
 				Simulant one = population.Alive[Generators.Random.Next(population.Alive.Count)];
 				Simulant two = population.Alive[Generators.Random.Next(population.Alive.Count)];
 
