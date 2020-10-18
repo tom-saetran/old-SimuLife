@@ -1,14 +1,14 @@
 ﻿namespace SimuLife {
 	partial class Simulant {
 		public enum AlertnessStages {
-			Metaconscious,
-			Conscious,
-			Confused,
-			Delirious,
-			Somnolent,
-			Obtuned,
+			Comatose,	
 			Stuporous,
-			Comatose
+			Obtuned,
+			Somnolent,
+			Delirious,
+			Confused,
+			Conscious,
+			Metaconscious
 		}
 	}
 }

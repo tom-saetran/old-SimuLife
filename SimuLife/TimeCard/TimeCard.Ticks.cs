@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace SimuLife {
+﻿namespace SimuLife {
 	partial class TimeCard {
 		public uint Ticks => GetTicksFromTimeCard(this);
 
@@ -15,16 +13,18 @@ namespace SimuLife {
 			return new TimeCard((Hours)  (rawTime      % 12),
 								(Days)   (rawTime / 12 %  7),
 								(Seasons)(rawTime / 84 %  4),
-									      rawTime / 336);
+							   /*Years*/  rawTime / 336);
 		}
 
 		public static int GetDifferenceInTicks(TimeCard first, TimeCard second) {
-			int diff = (int) GetTicksFromTimeCard(first) - (int) GetTicksFromTimeCard(second);
-			return diff;
+			return (int) (GetTicksFromTimeCard(first) - GetTicksFromTimeCard(second));
 		}
 
 		public static TimeCard GetDifferenceInTimeCard(TimeCard first, TimeCard second) {
-			return GetTimeCardFromTicks((uint) GetDifferenceInTicks(first, second));
+			int difference = GetDifferenceInTicks(first, second);
+			if (difference < 0)
+				difference = -difference;
+			return GetTimeCardFromTicks((uint)difference);
 		}
 	}
 }

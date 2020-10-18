@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 // introduce waiting time for simulant close to each
 // other to pass time waiting for information back called tidbits.
@@ -14,18 +13,20 @@ using System.Collections.Generic;
 
 namespace SimuLife {
 	partial class Simulant {
-		public Simulant		   ParentFemale		{ get; protected set; }
-		public Simulant		   ParentMale		{ get; protected set; }
+		public Simulant		   ParentFemale		{ get; }
+		public Simulant		   ParentMale		{ get; }
 		public List<Simulant>  Children			{ get; protected set; }
 		public Name			   Name				{ get; protected set; }
-		public TimeCard		   TimeOfConception { get; protected set; }
-		public TimeCard		   TimeOfBirth		{ get; protected set; }
+		public TimeCard		   TimeOfConception { get; }
+		public TimeCard		   TimeOfBirth		{ get; }
 		public TimeCard		   TimeOfDeath		{ get; protected set; }
 		public Genders		   Gender			{ get; protected set; }
 		public AlertnessStages AlertnessStage   { get; protected set; }
 		public AwakenessStages AwakenessStage   { get; protected set; }
 
 		public TimeCard AgeAtDeath => TimeCard.GetDifferenceInTimeCard(TimeOfDeath, TimeOfBirth);
+		public TimeCard Age        => TimeCard.GetDifferenceInTimeCard(Simulator.TimeNow, TimeOfBirth);
+		public TimeCard AgeAtBirth => TimeCard.GetDifferenceInTimeCard(TimeOfConception, TimeOfBirth);
 
 		public Simulant (Simulant parentFemale, Simulant parentMale) {
 			ParentFemale	 = parentFemale;

@@ -1,38 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SimuLife {
 	class Program {
 		static void Main () {
-			Population population = new Population(100);
+			Population population = new Population(50);
 
 			WriteTime();
 
-
+			uint simulatorRuntime = 0;
 
 			while (Simulator.TimeNow.Year < 2020) {
+				simulatorRuntime++;
 				Simulator.StartEvent(Simulator.Events.AdvanceTime);
 
-				Simulant one = population.Alive[Generators.Random.Next(population.Alive.Count)];
-				Simulant two = population.Alive[Generators.Random.Next(population.Alive.Count)];
+				Simulant one = population.Alive.ElementAt(Generators.Random.Next(population.Alive.Count));
+				Simulant two = population.Alive.ElementAt(Generators.Random.Next(population.Alive.Count));
 
-				Simulant x = Simulant.Conceive(one, two);
-				if (x != null) {
-					population.Alive.Add(x);
+				Simulant newSim = Simulant.Conceive(one, two);
+				if (newSim != null) {
+					population.Alive.Add(newSim);
 				}
 
-				if (Simulator.TimeNow.Ticks % 336 == 0) {
-					List<Simulant> moveToDead = new List<Simulant>(0);
+				if (TimeCard.GetTicksFromTimeCard(Simulator.TimeNow) % 336 == 0) {
 
-					foreach (Simulant simulant in population.Alive) {
-						if (simulant.HealthStage == Simulant.HealthStages.Dead) {
-							moveToDead.Add(simulant);
-						}
-					}
-					foreach (Simulant simulant in moveToDead) {
+					List<Simulant> newlyDeadSimulants =
+						population.Alive.Where(sim =>
+							sim.HealthStage == Simulant.HealthStages.Dead).ToList();
+
+					foreach (Simulant simulant in newlyDeadSimulants) {	
 						population.Alive.Remove(simulant);
 						population.Dead.Add(simulant);
-					}
+					}					
 				}
 			}
 			

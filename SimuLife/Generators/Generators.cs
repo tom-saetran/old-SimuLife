@@ -12,7 +12,15 @@ namespace SimuLife {
 		}
 
 		public static string GetNewLastNameFromPool () {
-			return "Last";
+			string[] pool = { "Arvidsen",
+							  "Berge",
+							  "Cakeboss",
+							  "Didriksen",
+							  "Elvisdatter",
+							  "Fargeblyant",
+							  "Gra",
+							  "Haraldsen"};
+			return pool[Random.Next(0, pool.Length)];
 		}
 
 		public static Name GenerateName (Simulant simulant) {
@@ -37,15 +45,15 @@ namespace SimuLife {
 		public static TimeCard GenerateBirthTime (Simulant simulant) {
 			return TimeCard.GetTimeCardFromTicks(
 				   TimeCard.GetTicksFromTimeCard(simulant.TimeOfConception) +
-				   (uint) Random.Next(18, 25));
+				   (uint) Random.Next(216, 288)); // 3 seasons +/- 3 days
 		}
 
 		public static TimeCard GenerateDeathTime (Simulant simulant) {
 			return TimeCard.GetTimeCardFromTicks(
 				   TimeCard.GetTicksFromTimeCard(simulant.TimeOfConception) +
 				   (uint)
-					 (75 +  // mean
-					   (25 * // stdDev
+					 (77 +  // mean
+					   (9 * // stdDev
 					     (Math.Sqrt
 					       (-2 * Math.Log
 						     (1 - Random.NextDouble())) *
