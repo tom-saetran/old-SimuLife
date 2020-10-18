@@ -20,11 +20,12 @@ namespace SimuLife {
 							  "Fargeblyant",
 							  "Gra",
 							  "Haraldsen"};
+
 			return pool[Random.Next(0, pool.Length)];
 		}
 
 		public static Name GenerateName (Simulant simulant) {
-			string first = simulant.Gender == Simulant.Genders.Female     ?
+			string first = simulant.Gender == Simulant.Genders.Female ?
 			FirstNamesFemale[Random.Next(FirstNamesFemale.Length)] :
 			FirstNamesMale  [Random.Next(FirstNamesMale.Length)];
 
@@ -32,11 +33,11 @@ namespace SimuLife {
 				return new Name(first, GetNewLastNameFromPool());
 			}
 
-			string last = Random.NextDouble() < 0.7 ?
+			string last = Random.NextDouble() < 13 / 18 ?
 			simulant.ParentMale.Name.LastName :
 			simulant.ParentFemale.Name.LastName;
 
-			last = Random.NextDouble() < 0.1 ?
+			last = Random.NextDouble() < 1 / 300 ?
 			GetNewLastNameFromPool() : last;
 
 			return new Name(first, last);
