@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 
 namespace SimuLife {
 	class Program {
 		static void Main () {
-			Population population = new Population(50);
+			Population population = new Population(500);
 
 			WriteTime();
 
@@ -16,15 +15,15 @@ namespace SimuLife {
 				simulatorRuntime++;
 				Simulator.StartEvent(Simulator.Events.AdvanceTime);
 
-				Simulant one = population.AliveFemale.ElementAt(Generators.Random.Next(population.AliveFemale.Count));
-				Simulant two = population.AliveMale.ElementAt(Generators.Random.Next(population.AliveMale.Count));
+				Simulant randomFemale = population.AliveFemale.ElementAt(Generators.Random.Next(population.AliveFemale.Count));
+				Simulant randomMale = population.AliveMale.ElementAt(Generators.Random.Next(population.AliveMale.Count));
 
-				Simulant newSim = Simulant.Conceive(one, two);
-				if (newSim != null) {
-					if (newSim.Gender == Simulant.Genders.Female)
-					population.AliveFemale.Add(newSim);
-				else
-					population.AliveMale.Add(newSim);
+				Simulant resultingSimulant = Simulant.Conceive(randomFemale, randomMale);
+				if (resultingSimulant != null) {
+					if (resultingSimulant.Gender == Simulant.Genders.Female)
+						population.AliveFemale.Add(resultingSimulant);
+					else
+						population.AliveMale.Add(resultingSimulant);
 				}
 
 				if (TimeCard.GetTicksFromTimeCard(Simulator.TimeNow) % 336 == 0) {

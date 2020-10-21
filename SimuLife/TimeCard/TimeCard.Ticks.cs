@@ -9,11 +9,11 @@
 			 (uint) time.Hour;
 		}
 
-		public static TimeCard GetTimeCardFromTicks (uint rawTime) {
-			return new TimeCard((Hours)  (rawTime      % 12),
-								(Days)   (rawTime / 12 %  7),
-								(Seasons)(rawTime / 84 %  4),
-							   /*Years*/  rawTime / 336);
+		public static TimeCard GetTimeCardFromTicks (uint tickTime) {
+			return new TimeCard((Hours)  (tickTime      % 12),
+								(Days)   (tickTime / 12 %  7),
+								(Seasons)(tickTime / 84 %  4),
+							   /*Years*/  tickTime / 336);
 		}
 
 		public static int GetDifferenceInTicks(TimeCard first, TimeCard second) {

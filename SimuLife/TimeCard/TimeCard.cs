@@ -5,9 +5,9 @@
 		public Seasons Season	{ get; protected set; }
 		public uint    Year		{ get; protected set; }
 
-		public const short NumHours   = 12;
-		public const short NumDays    =  7;
-		public const short NumSeasons =  4;
+		public const short MaxHours   = 12;
+		public const short MaxDays    =  7;
+		public const short MaxSeasons =  4;
 
 		public TimeCard (Hours hour, Days day, Seasons season, uint year) {
 			Hour   = hour;

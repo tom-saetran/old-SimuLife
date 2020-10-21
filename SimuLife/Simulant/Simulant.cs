@@ -26,7 +26,6 @@ namespace SimuLife {
 
 		public TimeCard AgeAtDeath => TimeCard.GetDifferenceInTimeCard(TimeOfDeath, TimeOfBirth);
 		public TimeCard Age        => TimeCard.GetDifferenceInTimeCard(Simulator.TimeNow, TimeOfBirth);
-		public TimeCard AgeAtBirth => TimeCard.GetDifferenceInTimeCard(TimeOfConception, TimeOfBirth);
 
 		public Simulant (Simulant parentFemale, Simulant parentMale) {
 			ParentFemale	 = parentFemale;

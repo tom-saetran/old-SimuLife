@@ -42,13 +42,13 @@
 			uint nextYear   =       TimeNext.Year;
 
 			nextHour++;
-			if (nextHour == TimeCard.NumHours) {
+			if (nextHour == TimeCard.MaxHours) {
 				nextHour = 0;
 				nextDay++;
-				if (nextDay == TimeCard.NumDays) {
+				if (nextDay == TimeCard.MaxDays) {
 					nextDay = 0;
 					nextSeason++;
-					if (nextSeason == TimeCard.NumSeasons) {
+					if (nextSeason == TimeCard.MaxSeasons) {
 						nextSeason = 0;
 						nextYear++;
 					}
