@@ -13,27 +13,33 @@
 
 namespace SimuLife {
 	partial class Simulant {
-		public Simulant		   ParentFemale		{ get; }
-		public Simulant		   ParentMale		{ get; }
-		public List<Simulant>  Children			{ get; protected set; }
-		public Name			   Name				{ get; protected set; }
-		public TimeCard		   TimeOfConception { get; }
-		public TimeCard		   TimeOfBirth		{ get; }
-		public TimeCard		   TimeOfDeath		{ get; protected set; }
-		public Genders		   Gender			{ get; protected set; }
-		public AlertnessStages AlertnessStage   { get; protected set; }
-		public AwakenessStages AwakenessStage   { get; protected set; }
+		public Simulant		   ParentFemale		 { get; }
+		public Simulant		   ParentMale		 { get; }
+		public List<Simulant>  Children			 { get; protected set; }
+		public Name			   Name				 { get; protected set; }
+		public Genders		   Gender			 { get; protected set; }
+		public AlertnessStages AlertnessStage    { get; protected set; }
+		public AwakenessStages AwakenessStage    { get; protected set; }
 
-		public TimeCard AgeAtDeath => TimeCard.GetDifferenceInTimeCard(TimeOfDeath, TimeOfBirth);
-		public TimeCard Age        => TimeCard.GetDifferenceInTimeCard(Simulator.TimeNow, TimeOfBirth);
+		private uint TimeOfConception { get; }
+		private uint TimeOfBirth      { get; }
+		private uint TimeOfDeath      { get; set; }
+		public TimeCard TimeCardOfConception =>	
+			TimeCard.GetTimeCardFromTicks(TimeOfConception);
+		public TimeCard TimeCardOfBirth =>
+			TimeCard.GetTimeCardFromTicks(TimeOfBirth);
+		public TimeCard TimeCardOfDeath =>
+			TimeCard.GetTimeCardFromTicks(TimeOfDeath);
+		public TimeCard SimulantAge	=>
+			TimeCard.GetTimeCardFromTicks(Simulator.Time - TimeOfBirth);
 
 		public Simulant (Simulant parentFemale, Simulant parentMale) {
 			ParentFemale	 = parentFemale;
 			ParentMale		 = parentMale;
 			Children		 = new List<Simulant>(0);
-			TimeOfConception = Simulator.TimeNow;
-			TimeOfBirth		 = Generators.GenerateBirthTime(this);
-			TimeOfDeath		 = Generators.GenerateDeathTime(this);
+			TimeOfConception = Simulator.Time;
+			TimeOfBirth		 = Generators.GenerateBirthTime(TimeOfConception);
+			TimeOfDeath		 = Generators.GenerateDeathTime(TimeOfConception);
 			Gender			 = Generators.GenerateGender();
 			Name			 = Generators.GenerateName(this);
 			AlertnessStage	 = AlertnessStages.Comatose;

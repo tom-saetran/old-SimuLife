@@ -7,7 +7,7 @@
 			Senior,     Elder, Ancient
 		}
 
-		public LifeStages LifeStage => TimeCard.GetDifferenceInTicks(Simulator.TimeNow, TimeOfBirth) switch {
+		public LifeStages LifeStage => (int)(Simulator.Time - TimeOfBirth) switch {
 			int n when n > 33600 => LifeStages.Ancient,
 			int n when n > 26880 => LifeStages.Elder,
 			int n when n > 20832 => LifeStages.Senior,

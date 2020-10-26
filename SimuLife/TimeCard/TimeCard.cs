@@ -1,25 +1,47 @@
-﻿namespace SimuLife {
-	partial class TimeCard {
-		public Hours   Hour		{ get; protected set; }
-		public Days    Day		{ get; protected set; }
-		public Seasons Season	{ get; protected set; }
-		public uint    Year		{ get; protected set; }
+﻿using System;
 
-		public const short MaxHours   = 12;
-		public const short MaxDays    =  7;
-		public const short MaxSeasons =  4;
+namespace SimuLife {
+	partial class TimeCard {
+		public uint Ticks { get; }
+
+		public Hours   Hour   => (Hours)  (Ticks % 12);
+		public Days    Day    => (Days)   (Ticks / 12 % 7);
+		public Seasons Season => (Seasons)(Ticks / 84 % 4);
+		public uint    Year   =>           Ticks / 336;
+
+		public const ushort TicksInYear = 336;
+		public const ushort TicksInSeason = 84;
+
+		public const ushort MaxHours   = 12;
+		public const ushort MaxDays    =  7;
+		public const ushort MaxSeasons =  4;
 
 		public TimeCard (Hours hour, Days day, Seasons season, uint year) {
-			Hour   = hour;
-			Day    = day;
-			Season = season;
-			Year   = year;
+			Ticks = ((uint) hour   * MaxHours)   +
+					((uint) day    * MaxDays)    +
+					((uint) season * MaxSeasons) +
+					        year   * TicksInYear;
 		}
+
 		public TimeCard (TimeCard time) {
-			Hour   = time.Hour;
-			Day    = time.Day;
-			Season = time.Season;
-			Year   = time.Year;
+			Ticks = ((uint) time.Hour   * MaxHours)   +
+					((uint) time.Day    * MaxDays)    +
+					((uint) time.Season * MaxSeasons) +
+					        time.Year   * TicksInYear;
+		}
+
+		public static uint GetTicksFromTimeCard (TimeCard time) {
+			return (time.Year   * 336) +
+			((uint) time.Season * 84) +
+			((uint) time.Day    * 7) +
+			 (uint) time.Hour;
+		}
+
+		public static TimeCard GetTimeCardFromTicks (uint tickTime) {
+			return new TimeCard((Hours)  (tickTime      % 12),
+								(Days)   (tickTime / 12 %  7),
+								(Seasons)(tickTime / 84 %  4),
+							   /*Years*/  tickTime / 336);
 		}
 	}
 }

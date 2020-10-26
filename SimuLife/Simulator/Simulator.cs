@@ -1,11 +1,27 @@
 ﻿namespace SimuLife {
-	static partial class Simulator {
-		public static TimeCard TimeNow	{ get; private set; }
-		public static TimeCard TimeNext { get; private set; }
-		
+	static class Simulator {
+
+		public static uint Time { get; private set; }
+		public static TimeCard TimeNow => TimeCard.GetTimeCardFromTicks(Time);
+
 		static Simulator () {
-			TimeNow  = new TimeCard(0,0,0,420);
-			TimeNext = new TimeCard(0,0,0,420);
+			Time = TimeCard.GetTicksFromTimeCard(new TimeCard(0,0,0,420));
+		}
+
+		public enum Events {
+			AdvanceTime,
+			NewYear,
+			Spring,
+			MidSummer,
+			Harvest,
+			Christmas
+		}
+		public static void StartEvent (Events _event) {
+			switch (_event) {
+				case Events.AdvanceTime:
+					Time++;
+					break;
+			}
 		}
 	}
 }

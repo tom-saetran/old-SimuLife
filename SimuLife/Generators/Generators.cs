@@ -43,25 +43,18 @@ namespace SimuLife {
 			return new Name(first, last);
 		}
 
-		public static TimeCard GenerateBirthTime (Simulant simulant) {
-			return TimeCard.GetTimeCardFromTicks(
-				   TimeCard.GetTicksFromTimeCard(simulant.TimeOfConception) +
-				   (uint) Random.Next(216, 288)); // 3 seasons +/- 3 days
+		public static uint GenerateBirthTime (uint timeOfConception) {
+			return timeOfConception + (uint) Random.Next(216, 288);
 		}
 
-		public static TimeCard GenerateDeathTime (Simulant simulant) {
-			return TimeCard.GetTimeCardFromTicks(
-				   TimeCard.GetTicksFromTimeCard(simulant.TimeOfConception) +
-				   (uint)
-					 (77 +  // mean
-					   (9 * // stdDev
-					     (Math.Sqrt
-					       (-2 * Math.Log
-						     (1 - Random.NextDouble())) *
-				  	      Math.Sin
-					       (2 * Math.PI * 
-					         (1 - Random.NextDouble()))))) *
-							   336); // one year
+		public static uint GenerateDeathTime (uint timeOfConception) {
+			short mean = 77, stdDev = 9;
+
+			return timeOfConception +
+				(uint) (mean + (stdDev *
+				(Math.Sqrt(-2 * Math.Log(1 - Random.NextDouble())) *
+				 Math.Sin(2 * Math.PI * (1 - Random.NextDouble()))))) *
+				 TimeCard.TicksInYear;
 		}
 	}
 }

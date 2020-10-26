@@ -9,10 +9,7 @@ namespace SimuLife {
 
 			WriteTime();
 
-			uint simulatorRuntime = 0;
-
-			while (Simulator.TimeNow.Year < 2020) {
-				simulatorRuntime++;
+			while (Simulator.Time < 2020 * 336) {
 				Simulator.StartEvent(Simulator.Events.AdvanceTime);
 
 				Simulant randomFemale = population.AliveFemale.ElementAt(Generators.Random.Next(population.AliveFemale.Count));
@@ -25,8 +22,7 @@ namespace SimuLife {
 					else
 						population.AliveMale.Add(resultingSimulant);
 				}
-
-				if (TimeCard.GetTicksFromTimeCard(Simulator.TimeNow) % 336 == 0) {
+				if (Simulator.Time % 336 == 0) {
 					List<Simulant> newlyDeadSimulants =
 						population.AliveFemale.Where(sim =>
 							sim.HealthStage == Simulant.HealthStages.Dead).Union(
@@ -41,9 +37,10 @@ namespace SimuLife {
 					}
 				}
 			}
-			
-			WriteTime();
+			List<Simulant> deadFemales = population.Dead.Where(sim => sim.Gender == Simulant.Genders.Female).ToList();
+			List<Simulant> deadMales   = population.Dead.Where(sim => sim.Gender == Simulant.Genders.Male).ToList();
 
+			WriteTime();
 			Environment.Exit(420);
 		}
 

@@ -1,7 +1,7 @@
 ﻿namespace SimuLife {
 	partial class Simulant {
 		public static void Kill (Simulant simulant) {
-			simulant.TimeOfDeath = Simulator.TimeNow;
+			simulant.TimeOfDeath = Simulator.Time;
 		}
 
 		public static Simulant Conceive (Simulant simulant, Simulant partner) {
@@ -31,13 +31,6 @@
 					  new Simulant(simulant, partner)	   :
 					  new Simulant(partner, simulant))	   :
 				  null;
-		}
-
-		public static void ToggleGender (Simulant simulant) {
-			simulant.Gender = 
-				simulant.Gender == Genders.Female ? 
-								   Genders.Male   :
-								   Genders.Female;
 		}
 	}
 }

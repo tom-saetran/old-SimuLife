@@ -6,7 +6,6 @@
 		}
 
 		public HealthStages HealthStage =>
-			TimeCard.GetDifferenceInTicks(TimeOfDeath, Simulator.TimeNow) > 0 ?
-				HealthStages.Alive : HealthStages.Dead;
+			TimeOfDeath > Simulator.Time ? HealthStages.Alive : HealthStages.Dead;
 	}
 }
