@@ -3,13 +3,13 @@
 namespace SimuLife {
 	static partial class Generators {
 
-		public static readonly Random Random = new Random();
+		public  static readonly Random Random = new Random();
+		private static readonly short mean = 77, stdDev = 9;
 
-		public static Simulant.Genders GenerateGender () {
-			return Random.NextDouble() < 0.5 ?
-				   Simulant.Genders.Female   :
-			       Simulant.Genders.Male;
-		}
+		public static Simulant.Genders GenerateGender () => 
+			Random.NextDouble() > 0.50888 ?
+			   Simulant.Genders.Female:
+			   Simulant.Genders.Male;
 
 		public static string GetNewLastNameFromPool () {
 			string[] pool = { "Arvidsen",
@@ -43,18 +43,13 @@ namespace SimuLife {
 			return new Name(first, last);
 		}
 
-		public static uint GenerateBirthTime (uint timeOfConception) {
-			return timeOfConception + (uint) Random.Next(216, 288);
-		}
+		public static uint GenerateBirthTime (uint timeOfConception) =>
+			timeOfConception + (uint) Random.Next(216, 288);
 
-		public static uint GenerateDeathTime (uint timeOfConception) {
-			short mean = 77, stdDev = 9;
-
-			return timeOfConception +
-				(uint) (mean + (stdDev *
+		public static uint GenerateDeathTime (uint timeOfConception) =>
+			timeOfConception + (uint) (mean + (stdDev *
 				(Math.Sqrt(-2 * Math.Log(1 - Random.NextDouble())) *
 				 Math.Sin(2 * Math.PI * (1 - Random.NextDouble()))))) *
 				 TimeCard.TicksInYear;
-		}
 	}
 }

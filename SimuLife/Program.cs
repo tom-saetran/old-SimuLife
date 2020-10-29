@@ -9,32 +9,19 @@ namespace SimuLife {
 
 			WriteTime();
 
-			while (Simulator.Time < 2020 * 336) {
-				Simulator.StartEvent(Simulator.Events.AdvanceTime);
+			while (Simulator.Time < 2020 * TimeCard.TicksInYear) {
+				Simulator.StartEvent(Simulator.YearlyEvents.AdvanceTime);
 
 				Simulant randomFemale = population.AliveFemale.ElementAt(Generators.Random.Next(population.AliveFemale.Count));
-				Simulant randomMale = population.AliveMale.ElementAt(Generators.Random.Next(population.AliveMale.Count));
+				Simulant randomMale   = population.AliveMale.ElementAt(Generators.Random.Next(population.AliveMale.Count));
 
 				Simulant resultingSimulant = Simulant.Conceive(randomFemale, randomMale);
 				if (resultingSimulant != null) {
-					if (resultingSimulant.Gender == Simulant.Genders.Female)
-						population.AliveFemale.Add(resultingSimulant);
-					else
-						population.AliveMale.Add(resultingSimulant);
+					population.AddSimulantToAlivePopulation(resultingSimulant);
 				}
-				if (Simulator.Time % 336 == 0) {
-					List<Simulant> newlyDeadSimulants =
-						population.AliveFemale.Where(sim =>
-							sim.HealthStage == Simulant.HealthStages.Dead).Union(
-								population.AliveMale.Where(sim =>
-									sim.HealthStage == Simulant.HealthStages.Dead)).ToList();
-
-					foreach (Simulant simulant in newlyDeadSimulants) {
-						_ = simulant.Gender == Simulant.Genders.Female ?
-							population.AliveFemale.Remove(simulant) :
-							population.AliveMale.Remove(simulant);
-						population.Dead.Add(simulant);
-					}
+				//WriteTime();
+				if (Simulator.Time % TimeCard.TicksInYear == 0) {
+					population.MoveAllEligibleSimulantsToDeadPopulation();
 				}
 			}
 			List<Simulant> deadFemales = population.Dead.Where(sim => sim.Gender == Simulant.Genders.Female).ToList();
@@ -44,7 +31,7 @@ namespace SimuLife {
 			Environment.Exit(420);
 		}
 
-		static void WriteTime () {
+		public static void WriteTime () {
 			Console.WriteLine(
 				"Time is " + Simulator.TimeNow.Hour   + 
 					  ", " + Simulator.TimeNow.Day    + 

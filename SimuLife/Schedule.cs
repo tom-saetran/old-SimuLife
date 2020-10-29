@@ -4,6 +4,9 @@ using System.Text;
 
 namespace SimuLife {
 	class Schedule {
+
+		
+
 		/* follows time and fires events when the time is right
 		 * 
 		 * some constructed schedules cant be broken, like elementary school

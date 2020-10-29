@@ -24,14 +24,16 @@ namespace SimuLife {
 		private uint TimeOfConception { get; }
 		private uint TimeOfBirth      { get; }
 		private uint TimeOfDeath      { get; set; }
-		public TimeCard TimeCardOfConception =>	
+		public TimeCard TimeOfConceptionAsTimeCard =>	
 			TimeCard.GetTimeCardFromTicks(TimeOfConception);
-		public TimeCard TimeCardOfBirth =>
+		public TimeCard TimeOfBirthAsTimeCard =>
 			TimeCard.GetTimeCardFromTicks(TimeOfBirth);
-		public TimeCard TimeCardOfDeath =>
+		public TimeCard TimeOfDeathAsTimeCard =>
 			TimeCard.GetTimeCardFromTicks(TimeOfDeath);
-		public TimeCard SimulantAge	=>
+		public TimeCard CurrentAgeAsTimeCard =>
 			TimeCard.GetTimeCardFromTicks(Simulator.Time - TimeOfBirth);
+		public TimeCard AgeAtDeathAsTimeCard =>
+			TimeCard.GetTimeCardFromTicks(TimeOfDeath - TimeOfConception);
 
 		public Simulant (Simulant parentFemale, Simulant parentMale) {
 			ParentFemale	 = parentFemale;

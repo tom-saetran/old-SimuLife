@@ -4,17 +4,19 @@ namespace SimuLife {
 	partial class TimeCard {
 		public uint Ticks { get; }
 
-		public Hours   Hour   => (Hours)  (Ticks % 12);
-		public Days    Day    => (Days)   (Ticks / 12 % 7);
-		public Seasons Season => (Seasons)(Ticks / 84 % 4);
-		public uint    Year   =>           Ticks / 336;
+		public static readonly ushort MaxHours      = 12;
+		public static readonly ushort MaxDays       =  7;
+		public static readonly ushort MaxSeasons    =  4;
+		public static readonly ushort TicksInSeason = 84;
+		public static readonly ushort TicksInYear   = 336;
 
-		public const ushort TicksInYear = 336;
-		public const ushort TicksInSeason = 84;
+		public Hours   Hour   => (Hours)  (Ticks % MaxHours);
+		public Days    Day    => (Days)   (Ticks / MaxHours % MaxDays);
+		public Seasons Season => (Seasons)(Ticks / TicksInSeason % MaxSeasons);
+		public uint    Year   =>           Ticks / TicksInYear;
 
-		public const ushort MaxHours   = 12;
-		public const ushort MaxDays    =  7;
-		public const ushort MaxSeasons =  4;
+
+
 
 		public TimeCard (Hours hour, Days day, Seasons season, uint year) {
 			Ticks = ((uint) hour   * MaxHours)   +
@@ -23,25 +25,19 @@ namespace SimuLife {
 					        year   * TicksInYear;
 		}
 
-		public TimeCard (TimeCard time) {
-			Ticks = ((uint) time.Hour   * MaxHours)   +
-					((uint) time.Day    * MaxDays)    +
-					((uint) time.Season * MaxSeasons) +
-					        time.Year   * TicksInYear;
+		public TimeCard (uint ticks) {
+			Ticks = ticks;
 		}
 
 		public static uint GetTicksFromTimeCard (TimeCard time) {
-			return (time.Year   * 336) +
-			((uint) time.Season * 84) +
-			((uint) time.Day    * 7) +
+			return (time.Year   * TicksInYear)   +
+			((uint) time.Season * TicksInSeason) +
+			((uint) time.Day    * MaxDays)       +
 			 (uint) time.Hour;
 		}
 
 		public static TimeCard GetTimeCardFromTicks (uint tickTime) {
-			return new TimeCard((Hours)  (tickTime      % 12),
-								(Days)   (tickTime / 12 %  7),
-								(Seasons)(tickTime / 84 %  4),
-							   /*Years*/  tickTime / 336);
+			return new TimeCard(tickTime);
 		}
 	}
 }

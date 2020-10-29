@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace SimuLife {
 	class Population {
@@ -31,6 +32,29 @@ namespace SimuLife {
 					AliveFemale.Add(initialSimulant);
 				else
 					AliveMale.Add(initialSimulant);
+			}
+		}
+		public void AddSimulantToAlivePopulation (Simulant simulant) {
+			if (simulant.Gender == Simulant.Genders.Female)
+				AliveFemale.Add(simulant);
+			else
+				AliveMale.Add(simulant);
+		}
+		public void MoveSimulantToDeadPopulation (Simulant simulant) {
+			_ = simulant.Gender == Simulant.Genders.Female ?
+				AliveFemale.Remove(simulant) :
+				AliveMale.Remove(simulant);
+			Dead.Add(simulant);
+		}
+		public void MoveAllEligibleSimulantsToDeadPopulation () {
+			List<Simulant> newlyDeadSimulants =
+				AliveFemale.Where(sim =>
+					sim.HealthStage == Simulant.HealthStages.Dead).Union(
+						AliveMale.Where(sim =>
+							sim.HealthStage == Simulant.HealthStages.Dead)).ToList();
+
+			foreach (Simulant simulant in newlyDeadSimulants) {
+				MoveSimulantToDeadPopulation(simulant);
 			}
 		}
 	}
