@@ -4,8 +4,7 @@
 			Dead,
 			Alive
 		}
-
-		public HealthStages HealthStage =>
+		public      HealthStages HealthStage =>
 			TimeOfDeath > Simulator.Time ? HealthStages.Alive : HealthStages.Dead;
 	}
 }

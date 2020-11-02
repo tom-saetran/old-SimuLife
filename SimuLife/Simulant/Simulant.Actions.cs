@@ -1,10 +1,14 @@
 ﻿namespace SimuLife {
 	partial class Simulant {
-		public static void Kill (Simulant simulant) {
+		public static void     Kill      (Simulant simulant) {
 			simulant.TimeOfDeath = Simulator.Time;
+			AfterKill(simulant);
 		}
-
-		public static Simulant Conceive (Simulant simulant, Simulant partner) {
+		public static void     AfterKill (Simulant simulant) {
+			simulant.AlertnessLevel = 0;
+			simulant.AwakenessLevel = 0;
+		}
+		public static Simulant Conceive  (Simulant simulant, Simulant partner) {
 			float chance = 0.82f;
 
 			if (simulant.Gender == partner.Gender)

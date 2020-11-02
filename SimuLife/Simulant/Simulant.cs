@@ -15,15 +15,17 @@ namespace SimuLife {
 	partial class Simulant {
 		public Simulant		   ParentFemale		 { get; }
 		public Simulant		   ParentMale		 { get; }
-		public List<Simulant>  Children			 { get; protected set; }
-		public Name			   Name				 { get; protected set; }
-		public Genders		   Gender			 { get; protected set; }
-		public AlertnessStages AlertnessStage    { get; protected set; }
-		public AwakenessStages AwakenessStage    { get; protected set; }
+		public List<Simulant>  Children			 { get; }
+		public Name			   Name				 { get; }
 
-		private uint TimeOfConception { get; }
-		private uint TimeOfBirth      { get; }
-		private uint TimeOfDeath      { get; set; }
+		private uint   TimeOfConception { get; }
+		private uint   TimeOfBirth      { get; }
+		private uint   TimeOfDeath      { get; set; }
+		private ushort AwakenessLevel   { get; set; }
+		private ushort AlertnessLevel   { get; set; }
+		private ushort EngagementLevel  { get; set; }
+		private ushort IQLevel          { get; }
+
 		public TimeCard TimeOfConceptionAsTimeCard =>	
 			TimeCard.GetTimeCardFromTicks(TimeOfConception);
 		public TimeCard TimeOfBirthAsTimeCard =>
@@ -44,8 +46,10 @@ namespace SimuLife {
 			TimeOfDeath		 = Generators.GenerateDeathTime(TimeOfConception);
 			Gender			 = Generators.GenerateGender();
 			Name			 = Generators.GenerateName(this);
-			AlertnessStage	 = AlertnessStages.Comatose;
-			AwakenessStage	 = AwakenessStages.Asleep;
+			AlertnessLevel	 = 33;
+			AwakenessLevel	 = 33;
+			EngagementLevel  = 33;
+			IQLevel			 = Generators.GenerateIQLevel();
 
 			if (parentFemale != null)
 				parentFemale.Children.Add(this);

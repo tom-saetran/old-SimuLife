@@ -55,6 +55,7 @@ namespace SimuLife {
 
 			foreach (Simulant simulant in newlyDeadSimulants) {
 				MoveSimulantToDeadPopulation(simulant);
+				Simulant.AfterKill(simulant);
 			}
 		}
 	}

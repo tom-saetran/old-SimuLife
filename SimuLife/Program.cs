@@ -16,16 +16,26 @@ namespace SimuLife {
 				Simulant randomMale   = population.AliveMale.ElementAt(Generators.Random.Next(population.AliveMale.Count));
 
 				Simulant resultingSimulant = Simulant.Conceive(randomFemale, randomMale);
-				if (resultingSimulant != null) {
+				if (resultingSimulant != null)
 					population.AddSimulantToAlivePopulation(resultingSimulant);
-				}
-				//WriteTime();
-				if (Simulator.Time % TimeCard.TicksInYear == 0) {
+
+				if (Simulator.Time % TimeCard.TicksInYear == 0)
 					population.MoveAllEligibleSimulantsToDeadPopulation();
-				}
 			}
 			List<Simulant> deadFemales = population.Dead.Where(sim => sim.Gender == Simulant.Genders.Female).ToList();
 			List<Simulant> deadMales   = population.Dead.Where(sim => sim.Gender == Simulant.Genders.Male).ToList();
+
+			List<Simulant> Omnipotent       = population.Dead.Where(sim => sim.IQ == Simulant.IQs.Omnipotent).ToList();
+			List<Simulant> Savant           = population.Dead.Where(sim => sim.IQ == Simulant.IQs.Savant).ToList();
+			List<Simulant> Genious          = population.Dead.Where(sim => sim.IQ == Simulant.IQs.Genious).ToList();
+			List<Simulant> VeryHigh         = population.Dead.Where(sim => sim.IQ == Simulant.IQs.VeryHigh).ToList();
+			List<Simulant> High             = population.Dead.Where(sim => sim.IQ == Simulant.IQs.High).ToList();
+			List<Simulant> Normal           = population.Dead.Where(sim => sim.IQ == Simulant.IQs.Normal).ToList();
+			List<Simulant> SlightlyRetarded = population.Dead.Where(sim => sim.IQ == Simulant.IQs.SlightlyRetarded).ToList();
+			List<Simulant> Retarded         = population.Dead.Where(sim => sim.IQ == Simulant.IQs.Retarded).ToList();
+			List<Simulant> SeverelyRetarded = population.Dead.Where(sim => sim.IQ == Simulant.IQs.SeverelyRetarded).ToList();
+
+
 
 			WriteTime();
 			Environment.Exit(420);
