@@ -4,24 +4,13 @@ namespace SimuLife {
 	static partial class Generators {
 
 		public  static readonly Random Random = new Random();
-		private static readonly short simulantAgeMean = 77, simAgeStdDev = 9;
+		private static readonly short simulantAgeMean = 77, simulantAgeStdDev = 9;
+		private static readonly short simulantIQMean = 105, simulantIQStdDev = 25;
 
 		public  static Simulant.Genders GenerateGender () => 
 			Random.NextDouble() > 0.50888 ?
 			   Simulant.Genders.Female:
 			   Simulant.Genders.Male;
-		private static string GetNewLastNameFromPool () {
-			string[] pool = { "Arvidsen",
-							  "Berge",
-							  "Cakeboss",
-							  "Didriksen",
-							  "Elvisdatter",
-							  "Fargeblyant",
-							  "Gra",
-							  "Haraldsen"};
-
-			return pool[Random.Next(0, pool.Length)];
-		}
 		public  static Name   GenerateName (Simulant simulant) {
 			string first = simulant.Gender == Simulant.Genders.Female ?
 			FirstNamesFemale[Random.Next(FirstNamesFemale.Length)] :
@@ -44,10 +33,22 @@ namespace SimuLife {
 			timeOfConception + (uint) Random.Next(216, 288);
 		public  static uint   GenerateDeathTime (uint timeOfConception) =>
 			timeOfConception +
-			(uint) Math.Abs(NormalDistribution(simulantAgeMean, simAgeStdDev)) *
+			(uint) Math.Abs(NormalDistribution(simulantAgeMean, simulantAgeStdDev)) *
 			TimeCard.TicksInYear;
 		public  static ushort GenerateIQLevel () => 
-			(ushort) Math.Abs(NormalDistribution(105, 25));
+			(ushort) Math.Abs(NormalDistribution(simulantIQMean, simulantIQStdDev));
+		private static string GetNewLastNameFromPool () {
+			string[] pool = { "Arvidsen",
+							  "Berge",
+							  "Cakeboss",
+							  "Didriksen",
+							  "Elvisdatter",
+							  "Fargeblyant",
+							  "Gra",
+							  "Haraldsen"};
+
+			return pool[Random.Next(0, pool.Length)];
+		}
 		private static double NormalDistribution (short mean, short stdDev) => 
 			mean + (stdDev *
 			(Math.Sqrt(-2 * Math.Log(1 - Random.NextDouble())) *

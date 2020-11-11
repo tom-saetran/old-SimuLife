@@ -35,8 +35,6 @@ namespace SimuLife {
 			List<Simulant> Retarded         = population.Dead.Where(sim => sim.IQ == Simulant.IQs.Retarded).ToList();
 			List<Simulant> SeverelyRetarded = population.Dead.Where(sim => sim.IQ == Simulant.IQs.SeverelyRetarded).ToList();
 
-
-
 			WriteTime();
 			Environment.Exit(420);
 		}
