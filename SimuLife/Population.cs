@@ -11,22 +11,28 @@ namespace SimuLife {
 		public List<Simulant> AliveMale   { get; }
 		public List<Simulant> Dead		  { get; }
 
-		public Population (int initialPopulationSize) {				
-			God			= new	   Simulant(null,  null);
-			Jesus		= new	   Simulant(God,   God);
-			Adam		= new	   Simulant(Jesus, Jesus);
-			Eve			= new	   Simulant(Jesus, Jesus);
+		public Population (int initialPopulationSize) {
+			if (initialPopulationSize < 100)
+				initialPopulationSize = 100;
+
+			if (initialPopulationSize > 10000)
+				initialPopulationSize = 10000;
+
+			God			= new	   Simulant(null,  null,  this);
+			Jesus		= new	   Simulant(God,   God,   this);
+			Adam		= new	   Simulant(Jesus, Jesus, this);
+			Eve			= new	   Simulant(Jesus, Jesus, this);
 			AliveFemale = new List<Simulant>(initialPopulationSize * 100);
 			AliveMale   = new List<Simulant>(initialPopulationSize * 100);
 			Dead		= new List<Simulant>(initialPopulationSize * 1000);
 			
-			if (Adam.Gender == Simulant.Genders.Female)
-				Adam = new Simulant(Jesus, Jesus);
-			if (Eve.Gender == Simulant.Genders.Male)
-				Eve = new Simulant(Jesus, Jesus);
+			while (Adam.Gender == Simulant.Genders.Female)
+				Adam = new Simulant(Jesus, Jesus, this);
+			while (Eve.Gender == Simulant.Genders.Male)
+				Eve = new Simulant(Jesus, Jesus, this);
 
 			for (int i = 0; i < initialPopulationSize; i++) {
-				Simulant initialSimulant = new Simulant(Eve, Adam);
+				Simulant initialSimulant = new Simulant(Eve, Adam, this);
 
 				if (initialSimulant.Gender == Simulant.Genders.Female)
 					AliveFemale.Add(initialSimulant);

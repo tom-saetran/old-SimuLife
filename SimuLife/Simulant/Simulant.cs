@@ -18,6 +18,8 @@ namespace SimuLife {
 		public List<Simulant>  Children			 { get; }
 		public Name			   Name				 { get; }
 
+		public Population MyPopulation  { get; }
+
 		private uint   TimeOfConception { get; }
 		private uint   TimeOfBirth      { get; }
 		private uint   TimeOfDeath      { get; set; }
@@ -37,7 +39,8 @@ namespace SimuLife {
 		public TimeCard AgeAtDeathAsTimeCard =>
 			TimeCard.GetTimeCardFromTicks(TimeOfDeath - TimeOfConception);
 
-		public Simulant (Simulant parentFemale, Simulant parentMale) {
+		public Simulant (Simulant parentFemale, Simulant parentMale, Population population) {
+			MyPopulation     = population;
 			ParentFemale	 = parentFemale;
 			ParentMale		 = parentMale;
 			Children		 = new List<Simulant>(0);

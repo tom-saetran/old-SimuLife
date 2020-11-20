@@ -8,7 +8,7 @@
 			simulant.AlertnessLevel = 0;
 			simulant.AwakenessLevel = 0;
 		}
-		public static Simulant Conceive  (Simulant simulant, Simulant partner) {
+		public static Simulant Conceive  (Simulant simulant, Simulant partner, Population population) {
 			float chance = 0.82f;
 
 			if (simulant.Gender == partner.Gender)
@@ -32,8 +32,8 @@
 
 			return Generators.Random.NextDouble() < chance ?
 				  (simulant.Gender == Genders.Female	   ?
-					  new Simulant(simulant, partner)	   :
-					  new Simulant(partner, simulant))	   :
+					  new Simulant(simulant, partner, population)	   :
+					  new Simulant(partner, simulant, population))	   :
 				  null;
 		}
 	}

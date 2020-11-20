@@ -15,15 +15,15 @@ namespace SimuLife {
 				Simulant randomFemale = population.AliveFemale.ElementAt(Generators.Random.Next(population.AliveFemale.Count));
 				Simulant randomMale   = population.AliveMale.ElementAt(Generators.Random.Next(population.AliveMale.Count));
 
-				Simulant resultingSimulant = Simulant.Conceive(randomFemale, randomMale);
+				Simulant resultingSimulant = Simulant.Conceive(randomFemale, randomMale, population);
 				if (resultingSimulant != null)
 					population.AddSimulantToAlivePopulation(resultingSimulant);
 
 				if (Simulator.Time % TimeCard.TicksInYear == 0)
 					population.MoveAllEligibleSimulantsToDeadPopulation();
 			}
-			List<Simulant> deadFemales = population.Dead.Where(sim => sim.Gender == Simulant.Genders.Female).ToList();
-			List<Simulant> deadMales   = population.Dead.Where(sim => sim.Gender == Simulant.Genders.Male).ToList();
+			List<Simulant> DeadFemales      = population.Dead.Where(sim => sim.Gender == Simulant.Genders.Female).ToList();
+			List<Simulant> DeadMales        = population.Dead.Where(sim => sim.Gender == Simulant.Genders.Male).ToList();
 
 			List<Simulant> Omnipotent       = population.Dead.Where(sim => sim.IQ == Simulant.IQs.Omnipotent).ToList();
 			List<Simulant> Savant           = population.Dead.Where(sim => sim.IQ == Simulant.IQs.Savant).ToList();
